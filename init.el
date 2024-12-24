@@ -8,7 +8,6 @@
 
 ;; Initial load
 (org-babel-load-file (expand-file-name "config.org" user-emacs-directory))
-;; (org-babel-load-file (expand-file-name "desktop.org" user-emacs-directory))
 
 ;; Others
 (custom-set-variables
