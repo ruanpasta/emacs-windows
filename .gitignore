@@ -1,0 +1,32 @@
+# Ignore some emacs files and directorieis
+.cache
+auto-save*
+auto-save
+elpa/
+org-persist
+.dap*
+.lsp*
+projectile*
+transient/
+eln-cache/
+.last-package-update-day
+
+# Sesion files from EXWM
+session.*
+
+
+# Bookmarks of Projectile
+projectile-bookmarks.eld
+
+# Shell history and files in eshell
+eshell/
+
+# Ignore the config.el
+config.el
+desktop.el
+
+# Ignoring emacs files
+#*#
+*~
+.#*
+\#*\#
