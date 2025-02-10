@@ -117,6 +117,10 @@ Visual interface configs
   ;; Add the option to collapse function, objects etc ( C-c @ C-h )
   (add-hook 'prog-mode-hook #'hs-minor-mode)
 
+  ;; Change to use the visible bell instead of the sound
+  (setq visible-bell t)
+
+
 #+end_src
 
 ** Doom themes
@@ -179,6 +183,13 @@ switch to recently files to each project, and etc.
     :config
     (add-to-list 'projectile-globally-ignored-directories "node_modules")
     (projectile-mode +1))
+#+end_src
+
+* CIDER
+
+#+begin_src emacs-lisp
+  (use-package cider
+    :ensure t)
 #+end_src
 
 * Emacs improvments
@@ -267,6 +278,9 @@ Improve how we use and remember the shortcuts.
            (web-mode . lsp-deferred)
            (vue-mode . lsp-deferred)
            (go-mode . lsp-deferred)
+           (clojure-mode . lsp-deferred)
+           (clojurec-mode . lsp-deferred)
+           (clojurescript-mode . lsp-deferred)
            (lsp-mode . lsp-enable-which-key-integration))
     :init
     (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
@@ -317,6 +331,14 @@ Improve how we use and remember the shortcuts.
     :hook (typescript-mode . lsp-deferred)
     :config
     (setq typescript-indent-level 2))
+
+  ;; CLOJURE -------------
+  (use-package clojure-mode
+    :ensure t
+    :mode ("\\.clj\\'" "\\.cljs\\'" "\\.cljc\\'")
+    :hook ((clojure-mode . lsp-deferred)
+           (clojurescript-mode . lsp-deferred)
+           (clojurec-mode . lsp-deferred)))
 
   ;; For JSON
   (use-package json-mode
@@ -374,11 +396,9 @@ Improve how we use and remember the shortcuts.
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
-
-
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
 #+end_src
 
 
@@ -478,9 +498,21 @@ The Evil package give us a power of text editing with VIM inside the emacs.
 ** TODO Hydra 
 To help/eliminate repetitive commands in emacs. Check if the package is hydra. 
 
+** Org Agenda
+
+#+begin_src emacs-lisp
+(setq org-agenda-files
+      (directory-files-recursively "C:/Users/Ruan_/OneDrive/Documentos/projects/agenda" "\\`[^#].*\\.org\\'"))
+
+      (global-set-key (kbd "C-c a") 'org-agenda)
+      (global-set-key (kbd "C-c c") 'org-capture)  ;; Quick capture tasks
+      (global-set-key (kbd "C-c l") 'org-store-link)  ;; Store links
+
+      (setq org-agenda-show-tags t)
+#+end_src
+
 ** Ivy Postfram
 To open the comands in the middle of the window or other local, like M-x command or any other.
 That a good option to check if it's better than the bottom default mode.
 https://github.com/tumashu/ivy-posframe
 
-Test
